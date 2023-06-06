@@ -8,9 +8,9 @@ class LotController {
         const transaction = await sequelize.transaction()
         try {
 
-            const {name, numProduct} = req.body
+            const {nameProduct, numProduct} = req.body
             const product = await Product.findOne({
-                    where: {name}
+                    where: {nameProduct}
                 },
                 {transaction: transaction}
             )
@@ -28,7 +28,8 @@ class LotController {
             const lot_id = await Lot.findOne({where: {userId}}, {transaction: transaction})
             const lotId = lot_id.id
 
-            const lot_product = await LotProduct.create({numProduct, lotId, productId}, {transaction: transaction})
+            const count = numProduct
+            const lot_product = await LotProduct.create({count, lotId, productId}, {transaction: transaction})
             await transaction.commit()
             return res.json(lot_product)
 
@@ -58,7 +59,6 @@ class LotController {
 
         } catch (e) {
             next(ApiError.badRequest(e.message))
-
         }
     }
 }

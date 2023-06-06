@@ -52,7 +52,7 @@ StockProduct.belongsTo(Stock)
 Lot.hasMany(LotProduct)
 LotProduct.belongsTo(Lot)
 
-Product.hasMany(LotProduct)
+Product.hasOne(LotProduct)
 LotProduct.belongsTo(Product)
 
 module.exports = {

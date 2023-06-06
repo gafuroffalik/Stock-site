@@ -48,8 +48,14 @@ class UserController{
 
     async check(req, res, next){
         try{
-            const token = generateJwt(req.user.id, req.user.login, req.user.role)
-            return res.json({token})
+            const token = req.headers.authorization.split(' ')[1]
+            if(!token || token=='') res.status(401).json({message:"Не авторизован"})
+            const login = jwt.verify(token,process.env.SECRET_KEY).login
+
+            const userInfo = await User.findOne({where:{login}});
+            const userRole = userInfo.role
+
+            return res.json({userRole})
         }catch (e) {
             next(ApiError.badRequest(e))
         }
