@@ -16,7 +16,7 @@ const NavBar = observer(() => {
     const navigate = useNavigate()
 
     const logOut = () => {
-        console.log({user})
+
         user.setUser({})
         user.setIsAuth(false)
         user.setRole("")
@@ -43,6 +43,7 @@ const NavBar = observer(() => {
                         <Button
                             variant="outline-light"
                             onClick={() => navigate(LOT_ROUTE)}
+                            className="ms-2"
                         >
                             Создать партию товара
                         </Button>

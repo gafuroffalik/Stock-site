@@ -6,6 +6,7 @@ import LotItem from "./LotItem";
 
 const LotList = observer(() => {
     const {lot} = useContext(Context)
+    console.log(lot)
     return (
         <Row className="d-flex">
             {lot.lots.map(lot =>

@@ -6,7 +6,7 @@ class StockController{
     async create(req, res, next){
         try{
             const {volume} = req.body
-            const stock = await Lot.create({volume})
+            const stock = await Stock.create({volume})
             return res.json({stock})
         }catch (e){
             next(ApiError.badRequest(e.message))
@@ -24,7 +24,6 @@ class StockController{
             next(ApiError.badRequest(e))
         }
     }
-
 }
 
 module.exports = new StockController()

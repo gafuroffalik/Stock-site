@@ -24,6 +24,9 @@ const Auth = observer(() => {
             }
             user.setUser(data)
             user.setIsAuth(true)
+            user.setRole(data.role)
+            user.setId(data.id)
+            console.log(user.getId)
             navigate(STOCK_ROUTE)
         } catch (e) {
             alert(e.response.data.message)
