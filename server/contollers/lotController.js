@@ -41,21 +41,21 @@ class LotController {
 
     async getAll(req, res, next) {
         try {
-            const token = req.headers.authorization.split(" ")[1]
-            if (!token) {
-                res.status(401).json({message: "Не авторизован"})
-            }
-            const login = jwt.verify(token, process.env.SECRET_KEY).login
-
-            const user_id = await User.findOne({where: {login}})
-            const userId = user_id.id
-
-            const lot_id = await Lot.findOne({where: {userId}})
-            const lotId = lot_id.id
-
-            //const lot_product_id = await LotProduct.findOne({where: {lotId}})
-            console.log(lotId)
-            return res.json(lot_id)
+            // const token = req.headers.authorization.split(" ")[1]
+            // if (!token) {
+            //     res.status(401).json({message: "Не авторизован"})
+            // }
+            // const login = jwt.verify(token, process.env.SECRET_KEY).login
+            //
+            // const user_id = await User.findOne({where: {login}})
+            // const userId = user_id.id
+            //
+            // const lot_id = await Lot.findOne({where: {userId}})
+            // const lotId = lot_id.id
+            //
+            // //const lot_product_id = await LotProduct.findOne({where: {lotId}})
+            // console.log(lotId)
+            // return res.json(lot_id)
 
             // let {id, limit, page} = req.query
             // limit = parseInt(limit) || 9
@@ -71,17 +71,17 @@ class LotController {
             //
             // return res.json(lots)
 
-            // const token = req.headers.authorization.split(' ')[1]
-            // if(!token) res.status(401).json({message:"Не авторизован"})
-            // const login = jwt.verify(token,process.env.SECRET_KEY).login
-            //
-            // const userID = await User.findOne({where:{login}})
-            // const userId = userID.id
-            //
-            // const lots = await Lot.findAll({where:{userId}})
-            //
-            //
-            // return res.json(lots)
+            const token = req.headers.authorization.split(' ')[1]
+            if(!token) res.status(401).json({message:"Не авторизован"})
+            const login = jwt.verify(token,process.env.SECRET_KEY).login
+
+            const userID = await User.findOne({where:{login}})
+            const userId = userID.id
+
+            const lots = await Lot.findAll({where:{userId}})
+
+
+            return res.json(lots)
 
         } catch (e) {
             next(ApiError.badRequest(e.message + " сработал try catch"))

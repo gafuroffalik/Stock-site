@@ -14,7 +14,7 @@ const Lot = observer(() => {
     const [productVisible, setProductVisible] = useState(false)
 
     useEffect(() => {
-        fetchOneLot(user.getId).then(data => lot.setLots(data))
+        fetchLots().then(data => lot.setLots(data))
     }, [])
 
     return (
